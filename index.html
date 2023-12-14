@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DE-VE-DE Film Database</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+  </head>
+  <body>
+    <h1>DE-VE-DE Film Database</h1>
+
+    <!-- Form to add a new film -->
+    <form id="postFilmForm">
+      <label for="title">Title:</label>
+      <input type="text" id="title" required />
+
+      <label for="genre">Genre:</label>
+      <input type="text" id="genrePost" required />
+
+      <label for="releaseDate">Release Date:</label>
+      <input type="text" id="releaseDate" placeholder="YYYY-MM-DD" required />
+
+      <button type="button" id="postFilmButton">Post Film</button>
+      <button type="button" id="getFilmsButton">Get Film</button>
+    </form>
+
+    <label for="searchTitle">Search by Title:</label>
+    <input type="text" id="searchTitle" />
+    <button type="button" id="searchButton">Search</button>
+    <div id="searchResultsContainer"></div>
+    <button type="button" id="showFavoritesButton">Show Favorites</button>
+    <!-- List to display films -->
+    <ul id="filmsList"></ul>
+
+    <!-- Firebase scripts -->
+    <script
+      type="module"
+      src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"
+    ></script>
+    <script
+      type="module"
+      src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"
+    ></script>
+
+    <!-- Your custom script -->
+    <script type="module" src="js/index.js"></script>
+  </body>
+</html>
