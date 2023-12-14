@@ -19,15 +19,12 @@ getFilmsButton.addEventListener('click', async () => {
 
 const searchButton = document.getElementById('searchButton');
 
-// Add an event listener to the search button
 searchButton.addEventListener('click', async () => {
     const searchTitle = document.querySelector('#searchTitle').value;
     console.log("hej")
 
-    // Call the search function with the entered title
     const searchResults = await searchByTitle(searchTitle);
     
-    // Display the search results
     displayFilms(searchResults);
 });
 
@@ -38,7 +35,7 @@ postFilmButton.addEventListener('click', () => {
         title: document.querySelector('#title').value,
         genre: document.querySelector('#genrePost').value,
         releaseDate: document.querySelector('#releaseDate').value,
-        favorite: false, // Initialize the favorite property as false
+        favorite: false, 
     };
 
     postFilmIfNotExists(film);

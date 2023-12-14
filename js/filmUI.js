@@ -35,7 +35,7 @@ function createFilmElement(film) {
     const titleElem = document.createElement('h3');
     const genreElem = document.createElement('p');
     const releaseDateElem = document.createElement('p');
-    const watchedButton = document.createElement('button');  // New button for marking as watched
+    const watchedButton = document.createElement('button');  
     const favoriteButton = document.createElement('button');
     const filmsElem = document.getElementById('filmsList');
 
@@ -43,7 +43,7 @@ function createFilmElement(film) {
         titleElem.innerText = film.film.title || 'N/A';
         genreElem.innerText = film.film.genre || 'N/A';
         releaseDateElem.innerText = film.film.releaseDate || 'N/A';
-        watchedButton.innerText = film.film.watched ? 'Unwatch' : 'Mark as Watched'; // Update button text based on watched status
+        watchedButton.innerText = film.film.watched ? 'Unwatch' : 'Mark as Watched'; 
 
         containerElem.append(titleElem);
         containerElem.append(genreElem);
@@ -72,17 +72,17 @@ function createFilmElement(film) {
 
             containerElem.append(favoriteButton);
 
-            // Add an event listener to the watched button
+            
             watchedButton.addEventListener('click', async () => {
                 const filmId = film.id;
-                const updatedWatchedStatus = !film.film.watched; // Toggle the watched status
+                const updatedWatchedStatus = !film.film.watched; 
 
                 try {
                     await updateDoc(doc(db, 'movies', filmId), {
                         watched: updatedWatchedStatus,
                     });
 
-                    // Update the button text based on the new watched status
+                    
                     watchedButton.innerText = updatedWatchedStatus ? 'Unwatch' : 'Mark as Watched';
                 } catch (error) {
                     console.log(`ERROR: ${error}`);
@@ -95,14 +95,14 @@ function createFilmElement(film) {
 
     favoriteButton.addEventListener('click', async () => {
         const filmId = film.id;
-        const updatedFavoriteStatus = !film.film.favorite; // Toggle the favorite status
+        const updatedFavoriteStatus = !film.film.favorite; 
 
         try {
             await updateDoc(doc(db, 'movies', filmId), {
                 favorite: updatedFavoriteStatus,
             });
 
-            // Update the button text based on the new favorite status
+          
             favoriteButton.innerText = updatedFavoriteStatus ? 'Unfavorite' : 'Favorite';
         } catch (error) {
             console.log(`ERROR: ${error}`);
@@ -119,7 +119,7 @@ function createFilmElement(film) {
 
         try {
             await deleteFilm(filmId);
-            containerElem.remove(); // Remove the film element from the UI
+            containerElem.remove(); 
         } catch (error) {
             console.log(`ERROR: ${error}`);
         }

@@ -7,9 +7,8 @@ async function postFilm(film) {
         
           const { title, genre, releaseDate } = film;
 
-          // Validate input
           if (!validateInput(title, genre, releaseDate)) {
-            return; // Don't proceed if input is not valid
+            return; 
         }
 
         await addDoc(collection(db, 'movies'), film);
@@ -25,11 +24,11 @@ async function postFilm(film) {
 async function getFilms(showFavorites = false) {
     try {
         const filmsCollection = collection(db, 'movies');
-        const filmsSnapshot = await getDocs(filmsCollection);
+        const filmsDatabase = await getDocs(filmsCollection);
 
         const formattedFilms = [];
 
-        filmsSnapshot.forEach((film) => {
+        filmsDatabase.forEach((film) => {
             const formattedFilm = {
                 id: film.id,
                 film: film.data(),
@@ -59,11 +58,9 @@ async function postFilmIfNotExists(film) {
     const titleExists = await isMovieTitleExists(film.title);
 
     if (!titleExists) {
-        // Title doesn't exist, proceed to add the film
         await postFilm(film);
     } else {
         console.log('Movie with the same title already exists.');
-        // You can provide user feedback or handle the situation as needed
     }
 }
 
@@ -73,7 +70,7 @@ async function searchByTitle(title) {
         const queryTitle = query(collection(db, 'movies'), where('title', '==', title));
         const movies = await getDocs(queryTitle);
 
-        console.log('Movies:', movies.docs.map(doc => doc.data())); // Log movies for debugging
+        console.log('Movies:', movies.docs.map(doc => doc.data())); 
 
         const searchResults = [];
 
@@ -90,14 +87,14 @@ async function searchByTitle(title) {
             }
         });
 
-        console.log('Search Results:', searchResults); // Log search results for debugging
+        console.log('Search Results:', searchResults); 
 
-        displaySearchResults(searchResults); // Display the search results
+        displaySearchResults(searchResults); 
 
         return searchResults;
     } catch (error) {
         console.log(`ERROR: ${error}`);
-        return []; // Return an empty array in case of an error
+        return []; 
     }
 }
 
@@ -116,10 +113,10 @@ async function isMovieTitleExists(title) {
         const queryTitle = query(moviesCollection, where('title', '==', title));
         const matchingMovies = await getDocs(queryTitle);
 
-        return !matchingMovies.empty; // Returns true if there are matching movies, indicating the title already exists
+        return !matchingMovies.empty;
     } catch (error) {
         console.log(`ERROR: ${error}`);
-        return false; // Handle the error as needed
+        return false; 
     }
 }
 
